@@ -1,0 +1,1269 @@
+/* ==========================================================================
+   CHARTE GRAPHIQUE OFFICIELLE & REVERSE-ENGINEERING : ENET'COM SFAX
+   École Nationale d'Électronique et des Télécommunications de Sfax
+   Université de Sfax • République Tunisienne
+   Extrait depuis https://enetcom.rnu.tn
+   ========================================================================== */
+
+:root {
+  /* Typographie officielle ENET'Com */
+  --font-sans: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-heading: 'Archivo', 'DM Sans', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  /* Palette de couleurs officielle ENET'Com (Tokens extraits du CSS de production) */
+  --enetcom-navy: #031c34;          /* Bleu nuit institutionnel profond (Primary) */
+  --enetcom-navy-dark: #021426;     /* Bleu nuit sombre */
+  --enetcom-navy-light: #0c5397;    /* Bleu roi d'accentuation (Primary Light) */
+  --enetcom-navy-soft: #f0f6ff;     /* Fond bleu très doux pour zones actives */
+  --enetcom-orange: #f36f21;        /* Orange ENET'Com dynamique (Secondary / Action) */
+  --enetcom-orange-hover: #d95a10;  /* Orange hover soutenu */
+  --enetcom-orange-soft: #fff7ed;   /* Orange clair pour badges et reflets */
+
+  --ink-primary: #031c34;           /* Titres en bleu nuit ENET'Com */
+  --ink-secondary: #353a3e;         /* Corps de texte lisible ENET'Com */
+  --ink-muted: #64748b;             /* Texte secondaire / Métadonnées */
+
+  --bg-page: #f6f8fb;               /* Fond de page gris/bleuté doux */
+  --bg-paper: #ffffff;              /* Blanc pur pour cartes et blocs */
+  --bg-subtle: #f8fafc;
+
+  --border-light: #e2e8f0;
+  --border-medium: #cbd5e1;
+  --border-navy: #031c34;
+  --border-orange: #f36f21;
+
+  --status-open: #016936;           /* Vert approbation officiel */
+  --status-open-bg: #d0e8d1;
+  --status-open-border: #68c07a;
+
+  --status-pending: #bd7f5a;        /* Ambre en attente */
+  --status-pending-bg: #faf2bf;
+  --status-pending-border: #f2711c;
+
+  --status-closed: #db2828;         /* Rouge rejet / clôture */
+  --status-closed-bg: #fad3d7;
+  --status-closed-border: #f00340;
+
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-pill: 30px;
+
+  /* Ombres douces d'ingénierie */
+  --shadow-paper: 0 2px 8px rgba(3, 28, 52, 0.06);
+  --shadow-card: 0 8px 24px rgba(3, 28, 52, 0.08);
+  --shadow-hover: 0 12px 32px rgba(3, 28, 52, 0.12);
+  --shadow-orange: 0 4px 14px rgba(243, 111, 33, 0.35);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--bg-page);
+  color: var(--ink-secondary);
+  line-height: 1.6;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  background-image: 
+    radial-gradient(circle at 50% 0%, #e0eaff 0%, #edf2f7 40%, #f6f8fb 100%),
+    linear-gradient(rgba(3, 28, 52, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(3, 28, 52, 0.02) 1px, transparent 1px);
+  background-size: 100% 100%, 32px 32px, 32px 32px;
+  background-attachment: fixed;
+}
+
+/* ==========================================================================
+   1. BANDEAUX SUPÉRIEURS INSTITUTIONNELS (REVERSE ENET'COM)
+   ========================================================================== */
+
+/* Top bar : République Tunisienne & Ministère */
+.enetcom-topbar {
+  background: var(--enetcom-navy-dark);
+  color: #94a3b8;
+  padding: 0.45rem 2rem;
+  font-size: 0.76rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  letter-spacing: 0.03em;
+}
+
+.enetcom-topbar-left {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.enetcom-topbar-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.enetcom-topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.network-badge-btn {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #f8fafc;
+  border-radius: var(--radius-pill);
+  padding: 0.25rem 0.85rem;
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.2s ease;
+}
+
+.network-badge-btn:hover {
+  background: rgba(255, 255, 255, 0.18);
+  border-color: var(--enetcom-orange);
+}
+
+.live-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: #10b981;
+  box-shadow: 0 0 8px #10b981;
+}
+
+/* Header principal de l'école (Bleu Nuit #031c34 + Liseré Orange #f36f21 + Glassmorphism sticky) */
+.enetcom-main-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(3, 28, 52, 0.94);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  color: #ffffff;
+  padding: 0.85rem 2rem;
+  border-bottom: 3px solid var(--enetcom-orange);
+  box-shadow: 0 4px 20px rgba(3, 28, 52, 0.2);
+  transition: all 0.3s ease;
+}
+
+.enetcom-header-inner {
+  max-width: 1140px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.enetcom-branding-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.enetcom-logo-container {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.enetcom-official-logo {
+  height: 52px;
+  width: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+}
+
+.enetcom-school-titles {
+  display: flex;
+  flex-direction: column;
+}
+
+.enetcom-school-title {
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+}
+
+.enetcom-school-subtitle {
+  font-size: 0.8rem;
+  color: #cbd5e1;
+  margin-top: 0.15rem;
+}
+
+.enetcom-accreditations {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding-left: 1.25rem;
+  border-left: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.accreditation-badge {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  padding: 0.2rem 0.55rem;
+  border-radius: 4px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #e2e8f0;
+  letter-spacing: 0.03em;
+}
+
+.accreditation-badge.highlight {
+  border-color: var(--enetcom-orange);
+  color: var(--enetcom-orange);
+}
+
+.accreditation-img {
+  height: 26px;
+  width: auto;
+  border-radius: 2px;
+  background: #ffffff;
+  padding: 2px 4px;
+}
+
+/* Cluster Portefeuille & Actions dans le header */
+.header-actions-cluster {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.wallet-badge-enetcom {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  padding: 0.45rem 1rem;
+  border-radius: var(--radius-pill);
+  font-size: 0.85rem;
+  color: #ffffff;
+}
+
+.wallet-badge-enetcom .eth-balance {
+  color: #93c5fd;
+  font-size: 0.8rem;
+}
+
+.admin-tag-enetcom {
+  background: var(--enetcom-orange);
+  color: #ffffff;
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 0.2rem 0.6rem;
+  border-radius: var(--radius-pill);
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+/* ==========================================================================
+   2. CONTENEUR PRINCIPAL & FICHE DU SCRUTIN
+   ========================================================================== */
+
+.portal-container {
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem 4rem;
+}
+
+/* Bannière de session académique */
+.session-banner {
+  background: #ffffff;
+  border: 1px solid var(--border-light);
+  border-top: 4px solid var(--enetcom-navy);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
+  padding: 1.75rem 2rem;
+  margin-bottom: 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.session-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.session-title-group h1 {
+  font-family: var(--font-heading);
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--enetcom-navy);
+  line-height: 1.25;
+}
+
+.session-title-group p {
+  color: var(--ink-muted);
+  font-size: 0.9rem;
+  margin-top: 0.35rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.contract-address-box {
+  text-align: right;
+}
+
+.contract-address-link {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--enetcom-navy-light);
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  text-decoration: none;
+  background: var(--enetcom-navy-soft);
+  padding: 0.3rem 0.75rem;
+  border-radius: var(--radius-pill);
+  border: 1px solid rgba(12, 83, 151, 0.2);
+  transition: all 0.2s ease;
+}
+
+.contract-address-link:hover {
+  background: #e0eaff;
+  color: var(--enetcom-orange);
+  border-color: var(--enetcom-orange);
+}
+
+/* Grille de statistiques officielles */
+.session-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1.25rem;
+}
+
+.stat-box {
+  display: flex;
+  flex-direction: column;
+}
+
+.stat-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  letter-spacing: 0.05em;
+  margin-bottom: 0.35rem;
+}
+
+.stat-value {
+  font-family: var(--font-heading);
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--enetcom-navy);
+}
+
+.stat-value.highlight-orange {
+  color: var(--enetcom-orange);
+}
+
+.stat-value.highlight-blue {
+  color: var(--enetcom-navy-light);
+}
+
+/* Statuts d'élection officiels (Badges ENET'Com) */
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 0.95rem;
+  border-radius: var(--radius-pill);
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.status-badge.open {
+  background: var(--status-open-bg);
+  color: var(--status-open);
+  border: 1px solid var(--status-open-border);
+}
+
+.status-badge.notstarted {
+  background: var(--status-pending-bg);
+  color: var(--status-pending);
+  border: 1px solid var(--status-pending-border);
+}
+
+.status-badge.closed {
+  background: var(--status-closed-bg);
+  color: var(--status-closed);
+  border: 1px solid var(--status-closed-border);
+}
+
+/* ==========================================================================
+   3. NAVIGATION PAR ONGLETS (STYLE PORTAIL UNIVERSITAIRE)
+   ========================================================================== */
+
+.enetcom-nav-tabs {
+  display: flex;
+  gap: 0.5rem;
+  border-bottom: 2px solid var(--border-medium);
+  margin-bottom: 2.25rem;
+  overflow-x: auto;
+  padding-bottom: 1px;
+}
+
+.enetcom-tab-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.85rem 1.4rem;
+  font-family: var(--font-sans);
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--ink-muted);
+  background: transparent;
+  border: none;
+  border-bottom: 3px solid transparent;
+  margin-bottom: -2px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+  border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+}
+
+.enetcom-tab-btn:hover {
+  color: var(--enetcom-navy);
+  background: rgba(3, 28, 52, 0.04);
+}
+
+.enetcom-tab-btn.active {
+  color: var(--enetcom-navy);
+  border-bottom-color: var(--enetcom-orange);
+  background: #ffffff;
+  box-shadow: 0 -2px 6px rgba(3, 28, 52, 0.04);
+}
+
+/* ==========================================================================
+   4. BULLETINS DE VOTE & ISOLOIR (STYLE INGÉNIERIE)
+   ========================================================================== */
+
+.ballot-desk-title {
+  font-family: var(--font-heading);
+  font-size: 1.55rem;
+  font-weight: 700;
+  color: var(--enetcom-navy);
+  margin-bottom: 0.35rem;
+}
+
+.ballot-desk-desc {
+  font-size: 0.92rem;
+  color: var(--ink-muted);
+  margin-bottom: 1.75rem;
+  max-width: 72ch;
+}
+
+.ballot-slips-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2.25rem;
+}
+
+.ballot-slip {
+  background: #ffffff;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  padding: 1.65rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  transition: all 0.25s ease;
+  box-shadow: var(--shadow-paper);
+}
+
+.ballot-slip:hover {
+  border-color: var(--enetcom-navy-light);
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-card);
+}
+
+.ballot-slip.selected {
+  border: 2px solid var(--enetcom-orange);
+  background: var(--enetcom-orange-soft);
+  box-shadow: var(--shadow-orange);
+  transform: translateY(-3px);
+}
+
+.ballot-order-tag {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--enetcom-navy-light);
+  background: var(--enetcom-navy-soft);
+  padding: 0.2rem 0.6rem;
+  border-radius: var(--radius-pill);
+  letter-spacing: 0.04em;
+  margin-bottom: 0.75rem;
+}
+
+.ballot-candidate-name {
+  font-family: var(--font-heading);
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--enetcom-navy);
+  margin-bottom: 0.65rem;
+  line-height: 1.3;
+}
+
+.ballot-program {
+  font-size: 0.88rem;
+  color: var(--ink-secondary);
+  line-height: 1.55;
+  margin-bottom: 1.5rem;
+  flex-grow: 1;
+}
+
+.ballot-selection-indicator {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--enetcom-orange);
+}
+
+/* ==========================================================================
+   5. BOUTONS D'ACTION OFFICIELS (STYLE ENET'COM PILL)
+   ========================================================================== */
+
+.btn-enetcom {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  padding: 0.75rem 1.75rem;
+  font-family: var(--font-sans);
+  font-size: 0.92rem;
+  font-weight: 600;
+  border-radius: var(--radius-pill);
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all 0.25s ease-in-out;
+  text-decoration: none;
+}
+
+/* Bouton principal orange ENET'Com (Bouton officiel signature) */
+.btn-enetcom-orange {
+  background: var(--enetcom-orange);
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(243, 111, 33, 0.28);
+}
+
+.btn-enetcom-orange:hover:not(:disabled) {
+  background: var(--enetcom-orange-hover);
+  box-shadow: 0 6px 18px rgba(243, 111, 33, 0.42);
+  transform: translateY(-2px) scale(1.02);
+}
+
+/* Bouton bleu nuit ENET'Com */
+.btn-enetcom-navy {
+  background: var(--enetcom-navy);
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(3, 28, 52, 0.25);
+}
+
+.btn-enetcom-navy:hover:not(:disabled) {
+  background: var(--enetcom-navy-light);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(12, 83, 151, 0.35);
+}
+
+/* Bouton contour blanc / neutre */
+.btn-enetcom-outline {
+  background: #ffffff;
+  border-color: var(--border-medium);
+  color: var(--enetcom-navy);
+  box-shadow: var(--shadow-paper);
+}
+
+.btn-enetcom-outline:hover:not(:disabled) {
+  background: var(--enetcom-navy-soft);
+  border-color: var(--enetcom-navy-light);
+  color: var(--enetcom-navy-light);
+}
+
+.btn-enetcom-danger {
+  background: var(--status-closed);
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(219, 40, 40, 0.25);
+}
+
+.btn-enetcom-danger:hover:not(:disabled) {
+  background: #b91c1c;
+  transform: translateY(-2px);
+}
+
+.btn-enetcom:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+/* ==========================================================================
+   6. AVIS, NOTIFICATIONS & ALERTES
+   ========================================================================== */
+
+.notice {
+  padding: 1.15rem 1.45rem;
+  border-radius: var(--radius-md);
+  margin-bottom: 1.75rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.95rem;
+  font-size: 0.9rem;
+  line-height: 1.55;
+  box-shadow: var(--shadow-paper);
+}
+
+.notice-info {
+  background: var(--enetcom-navy-soft);
+  border: 1px solid rgba(12, 83, 151, 0.25);
+  color: var(--enetcom-navy);
+}
+
+.notice-warning {
+  background: var(--status-pending-bg);
+  border: 1px solid var(--status-pending-border);
+  color: #78350f;
+}
+
+.notice-success {
+  background: var(--status-open-bg);
+  border: 1px solid var(--status-open-border);
+  color: #064e3b;
+}
+
+.notice-danger {
+  background: var(--status-closed-bg);
+  border: 1px solid var(--status-closed-border);
+  color: #7f1d1d;
+}
+
+/* ==========================================================================
+   7. PROCÈS-VERBAL & DÉPOUILLEMENT (STYLE CONSEIL SCIENTIFIQUE)
+   ========================================================================== */
+
+.protocol-sheet {
+  background: #ffffff;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  padding: 2.25rem;
+  box-shadow: var(--shadow-card);
+  margin-bottom: 2rem;
+}
+
+.winner-decree {
+  background: linear-gradient(180deg, #fffaf5 0%, #fff0e6 100%);
+  border: 2px solid var(--enetcom-orange);
+  border-radius: var(--radius-md);
+  padding: 2.25rem;
+  margin-bottom: 2rem;
+  text-align: center;
+  box-shadow: 0 6px 20px rgba(243, 111, 33, 0.12);
+}
+
+.winner-decree h3 {
+  font-family: var(--font-heading);
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--enetcom-navy);
+  margin: 0.6rem 0;
+}
+
+.tally-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1.25rem;
+}
+
+.tally-table th, .tally-table td {
+  padding: 1rem 1.25rem;
+  text-align: left;
+  border-bottom: 1px solid var(--border-light);
+  font-size: 0.92rem;
+}
+
+.tally-table th {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  color: var(--enetcom-navy);
+  background: var(--enetcom-navy-soft);
+  text-transform: uppercase;
+  font-size: 0.78rem;
+  letter-spacing: 0.05em;
+}
+
+.tally-bar-container {
+  height: 10px;
+  background: #e2e8f0;
+  border-radius: var(--radius-pill);
+  overflow: hidden;
+  margin-top: 0.45rem;
+}
+
+.tally-bar-fill {
+  height: 100%;
+  background: var(--enetcom-navy-light);
+  border-radius: var(--radius-pill);
+  transition: width 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.tally-bar-fill.lead {
+  background: var(--enetcom-orange);
+}
+
+/* ==========================================================================
+   8. FORMULAIRES & INPUTS
+   ========================================================================== */
+
+.desk-form-group {
+  margin-bottom: 1.35rem;
+}
+
+.desk-form-label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--enetcom-navy);
+  margin-bottom: 0.45rem;
+}
+
+.desk-input {
+  width: 100%;
+  padding: 0.75rem 1.15rem;
+  border: 1px solid var(--border-medium);
+  border-radius: var(--radius-pill);
+  font-family: var(--font-sans);
+  font-size: 0.92rem;
+  color: var(--ink-secondary);
+  background: #ffffff;
+  transition: all 0.2s ease;
+}
+
+.desk-input:focus {
+  outline: none;
+  border-color: var(--enetcom-orange);
+  box-shadow: 0 0 0 3px rgba(243, 111, 33, 0.18);
+}
+
+/* ==========================================================================
+   9. PIED DE PAGE ENET'COM SFAX
+   ========================================================================== */
+
+.enetcom-footer {
+  margin-top: 4rem;
+  background: var(--enetcom-navy);
+  color: #94a3b8;
+  padding: 2.25rem 2rem 1.75rem;
+  border-top: 3px solid var(--enetcom-orange);
+}
+
+.enetcom-footer-inner {
+  max-width: 1140px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  font-size: 0.82rem;
+}
+
+.enetcom-footer-links {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.enetcom-footer-links a {
+  color: #cbd5e1;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.enetcom-footer-links a:hover {
+  color: var(--enetcom-orange);
+}
+
+.enetcom-footer code {
+  font-family: var(--font-mono);
+  background: rgba(255, 255, 255, 0.1);
+  color: #e2e8f0;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+}
+
+/* ==========================================================================
+   10. RESPONSIVE DESIGN
+   ========================================================================== */
+
+@media (max-width: 900px) {
+  .enetcom-topbar {
+    flex-direction: column;
+    gap: 0.4rem;
+    text-align: center;
+  }
+  .enetcom-header-inner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .session-header-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .contract-address-box {
+    text-align: left;
+  }
+  .session-stats-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .session-stats-grid {
+    grid-template-columns: 1fr;
+  }
+  .enetcom-accreditations {
+    display: none;
+  }
+}
+
+/* ==========================================================================
+   11. COMPOSANTS INTERACTIFS MODERNES (ENET'COM INNOVATION)
+   ========================================================================== */
+
+/* Jauge de Quorum Interactive */
+.quorum-card {
+  margin-top: 1.5rem;
+  padding: 1.25rem 1.5rem;
+  background: var(--enetcom-navy-soft);
+  border: 1px solid rgba(12, 83, 151, 0.2);
+  border-radius: var(--radius-md);
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.quorum-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--enetcom-navy);
+}
+
+.quorum-status-pill {
+  padding: 0.2rem 0.65rem;
+  border-radius: var(--radius-pill);
+  font-size: 0.75rem;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.quorum-status-pill.reached {
+  background: var(--status-open-bg);
+  color: var(--status-open);
+  border: 1px solid var(--status-open-border);
+}
+
+.quorum-status-pill.pending {
+  background: var(--status-pending-bg);
+  color: #92400e;
+  border: 1px solid var(--status-pending-border);
+}
+
+.quorum-track {
+  position: relative;
+  height: 14px;
+  background: #e2e8f0;
+  border-radius: var(--radius-pill);
+  overflow: visible;
+}
+
+.quorum-bar {
+  height: 100%;
+  background: linear-gradient(90deg, #0c5397 0%, #f36f21 100%);
+  border-radius: var(--radius-pill);
+  transition: width 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.quorum-threshold-marker {
+  position: absolute;
+  top: -4px;
+  bottom: -4px;
+  left: 50%;
+  width: 3px;
+  background: #dc2626;
+  border-radius: 2px;
+  z-index: 5;
+  box-shadow: 0 0 6px rgba(220, 38, 38, 0.4);
+}
+
+.quorum-threshold-label {
+  position: absolute;
+  top: -22px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #dc2626;
+  white-space: nowrap;
+}
+
+/* Bouton Copie Contrat avec retour visuel */
+.copy-badge-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.2rem 0.5rem;
+  border-radius: var(--radius-pill);
+  font-size: 0.75rem;
+  color: var(--enetcom-navy-light);
+  transition: all 0.2s ease;
+}
+
+.copy-badge-btn:hover {
+  background: rgba(12, 83, 151, 0.1);
+  color: var(--enetcom-orange);
+}
+
+/* Badges de Départements ENET'Com */
+.dept-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 0.25rem 0.75rem;
+  border-radius: var(--radius-pill);
+  letter-spacing: 0.02em;
+}
+
+.dept-badge.telecom {
+  background: #eff6ff;
+  color: #1d4ed8;
+  border: 1px solid #bfdbfe;
+}
+
+.dept-badge.embedded {
+  background: #fff7ed;
+  color: #c2410c;
+  border: 1px solid #fed7aa;
+}
+
+.dept-badge.industrial {
+  background: #ecfdf5;
+  color: #047857;
+  border: 1px solid #a7f3d0;
+}
+
+.dept-badge.blank {
+  background: #f1f5f9;
+  color: #475569;
+  border: 1px solid #cbd5e1;
+}
+
+/* Avatar Monogramme Candidat */
+.candidate-header-row {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  margin-bottom: 0.85rem;
+}
+
+.candidate-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 1rem;
+  color: #ffffff;
+  flex-shrink: 0;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.candidate-avatar.telecom {
+  background: linear-gradient(135deg, #1d4ed8 0%, #3b82f6 100%);
+}
+
+.candidate-avatar.embedded {
+  background: linear-gradient(135deg, #f36f21 0%, #fb923c 100%);
+}
+
+.candidate-avatar.industrial {
+  background: linear-gradient(135deg, #059669 0%, #10b981 100%);
+}
+
+.candidate-avatar.blank {
+  background: linear-gradient(135deg, #475569 0%, #94a3b8 100%);
+}
+
+/* Liste des propositions du programme */
+.candidate-proposal-list {
+  list-style: none;
+  padding: 0;
+  margin: 0.85rem 0 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.candidate-proposal-item {
+  font-size: 0.82rem;
+  color: var(--ink-secondary);
+  display: flex;
+  align-items: flex-start;
+  gap: 0.45rem;
+  line-height: 1.45;
+}
+
+.candidate-proposal-item::before {
+  content: '▸';
+  color: var(--enetcom-orange);
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+/* Filtres rapides & Barre de recherche */
+.filter-search-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1.75rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.filter-pills-group {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.filter-pill {
+  padding: 0.4rem 0.95rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--border-medium);
+  background: #ffffff;
+  color: var(--ink-muted);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.filter-pill:hover {
+  border-color: var(--enetcom-orange);
+  color: var(--enetcom-navy);
+}
+
+.filter-pill.active {
+  background: var(--enetcom-navy);
+  border-color: var(--enetcom-navy);
+  color: #ffffff;
+  box-shadow: 0 2px 8px rgba(3, 28, 52, 0.2);
+}
+
+.search-input-box {
+  position: relative;
+  min-width: 250px;
+}
+
+.search-input-box input {
+  width: 100%;
+  padding: 0.48rem 1rem 0.48rem 2.25rem;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--border-medium);
+  font-size: 0.85rem;
+  background: #ffffff;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.search-input-box input:focus {
+  border-color: var(--enetcom-orange);
+  box-shadow: 0 0 0 3px rgba(243, 111, 33, 0.18);
+}
+
+.search-input-icon {
+  position: absolute;
+  left: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--ink-muted);
+  pointer-events: none;
+}
+
+/* Modal de confirmation de bulletin sécurisé */
+.ballot-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(3, 28, 52, 0.7);
+  backdrop-filter: blur(6px);
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.25rem;
+}
+
+.ballot-modal-content {
+  background: #ffffff;
+  border: 2px solid var(--enetcom-orange);
+  border-radius: var(--radius-lg);
+  max-width: 540px;
+  width: 100%;
+  padding: 2.25rem;
+  box-shadow: 0 25px 50px -12px rgba(3, 28, 52, 0.4);
+  position: relative;
+  animation: modalPop 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes modalPop {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.ballot-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1.25rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.ballot-preview-box {
+  background: var(--enetcom-navy-soft);
+  border: 1px solid rgba(12, 83, 151, 0.25);
+  border-radius: var(--radius-md);
+  padding: 1.25rem;
+  margin: 1.25rem 0;
+}
+
+.ballot-preview-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  margin-bottom: 0.5rem;
+}
+
+.ballot-preview-row:last-child {
+  margin-bottom: 0;
+}
+
+/* Mode Soutenance Interactif */
+.soutenance-stepper {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 0.75rem;
+  margin-bottom: 1.75rem;
+}
+
+.soutenance-step-card {
+  background: #ffffff;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  padding: 0.85rem 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.soutenance-step-card:hover {
+  border-color: var(--enetcom-orange);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-paper);
+}
+
+.soutenance-step-num {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--enetcom-orange);
+}
+
+.soutenance-step-title {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--enetcom-navy);
+}
+
+/* ==========================================================================
+   12. STYLES D'IMPRESSION OFFICIELLE (CERTIFICAT & PV DE SOUTENANCE)
+   ========================================================================== */
+
+@media print {
+  body {
+    background: #ffffff !important;
+    color: #000000 !important;
+  }
+  .enetcom-topbar,
+  .enetcom-main-header,
+  .enetcom-nav-tabs,
+  .header-actions-cluster,
+  .btn-enetcom,
+  .notice,
+  .filter-search-container,
+  .soutenance-stepper,
+  .enetcom-footer {
+    display: none !important;
+  }
+  .portal-container {
+    max-width: 100% !important;
+    padding: 0 !important;
+  }
+  .session-banner,
+  .protocol-sheet {
+    box-shadow: none !important;
+    border: 1px solid #cbd5e1 !important;
+    page-break-inside: avoid;
+  }
+}
